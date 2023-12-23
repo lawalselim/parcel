@@ -21,10 +21,12 @@ public class ProductController {
     }
 
 
-    @GetMapping("/")
+   /* @GetMapping("/")
     public Iterable<ProductDto> getProducts(){
         return productService.getAllProducts;
     }
+
+    */
     @GetMapping("/{id}")
     public ProductDto getProductById (@PathVariable Long id){
         return productService.getProductById(id);

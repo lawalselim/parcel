@@ -15,10 +15,16 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
+    private JWTService jwtService;
+
+    private EncryptionService encryptionService;
     @Autowired
-    public UserServiceImpl(UserRepository userRepository,PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JWTService jwtService, EncryptionService encryptionService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
+        this.encryptionService =encryptionService;
 
     }
 
@@ -66,16 +72,27 @@ public class UserServiceImpl implements UserService{
     public UserDto registerUser(UserDto userDto) {
         // Register user logic
         User user = UserMapper.mapToUser(userDto);
-        user.setPassword(passwordEncoder.encode(userDto.getPassword())); // Encrypt password
+        //
+        // user.setPassword(passwordEncoder.encode(userDto.getPassword())); // This line of code was testing the internally built encryption service with encoder
+        user.setPassword(encryptionService.encryptPassword(userDto.getPassword()));
         userRepository.save(user);
         return userDto;
     }
-    public UserDto loginUser(String email, String password) {
+    public UserDto loginUser(UserDto userDto) {
         // Login user logic
-        User user = userRepository.findByEmail(email);
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+        User user = userRepository.findByEmail(userDto.getEmail());
+        if (user.isPresent()) {
+            User user = userRepository,get();
+        }
+
+        if (user != null && encryptionService.verifyPassword(userDto.getPassword(), user.getPassword())) {
+            return jwtService.generateJWT(user);
+        }
+        /*if (user != null && passwordEncoder.matches(password, user.getPassword())) {
             return UserMapper.mapToUserDto(user);
         }
+
+         */
         return null; // Or throw an exception as needed
     }
 

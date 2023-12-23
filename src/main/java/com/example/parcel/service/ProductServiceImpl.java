@@ -26,9 +26,12 @@ public class ProductServiceImpl implements ProductService{
 
     //Get All product
 
-    public Iterable<Product> getAllProducts() {
+   /* public Iterable<Product> getAllProducts() {
+
         return productRepository.findAll();
     }
+
+    */
     //section focuses on getting product by id
     public ProductDto getProductById ( Long id){
         Optional<Product> productOptional = productRepository.findById(id);

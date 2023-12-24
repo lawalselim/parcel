@@ -60,14 +60,6 @@ public class UserServiceImpl implements UserService{
         existingUser.setAddress(userDto.getAddress());
         // Update other fields as needed
     }
-    public UserDto getUserByUserId(Long userId) {
-        Optional<User> userOptional = userRepository.findById(userId);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            return UserMapper.mapToUserDto(user);
-        }
-        return null; // Or throw an exception as needed
-    }
 
     public UserDto registerUser(UserDto userDto) {
         // Register user logic
@@ -78,23 +70,5 @@ public class UserServiceImpl implements UserService{
         userRepository.save(user);
         return userDto;
     }
-    public UserDto loginUser(UserDto userDto) {
-        // Login user logic
-        User user = userRepository.findByEmail(userDto.getEmail());
-        if (user.isPresent()) {
-            User user = userRepository,get();
-        }
 
-        if (user != null && encryptionService.verifyPassword(userDto.getPassword(), user.getPassword())) {
-            return jwtService.generateJWT(user);
-        }
-        /*if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            return UserMapper.mapToUserDto(user);
-        }
-
-         */
-        return null; // Or throw an exception as needed
-    }
-
-    // Other user-related service methods
 }

@@ -31,13 +31,12 @@ public class  UserController {
         }
 
     }
-    @PostMapping("/register")
-    public UserDto registerUser(@RequestBody UserDto userDto) {
-        return userService.registerUser(userDto);
-    }
- @PostMapping("/login")
+
+/* @PostMapping("/login")
  public UserDto loginUser(@RequestParam String email, @RequestParam String password) {
      return userService.loginUser(email, password);
  }
     // Other user-related endpoints
+
+ */
 }

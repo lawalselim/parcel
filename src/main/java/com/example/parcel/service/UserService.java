@@ -10,6 +10,6 @@ public interface UserService{
     UserDto updateUser(UserDto userDto);
         // Other user-related methods{
     UserDto registerUser(UserDto userDto);
-    UserDto loginUser(String email, String password);
+   // UserDto loginUser(String email, String password);
 
 }

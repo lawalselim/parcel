@@ -51,13 +51,10 @@ public class ProductServiceImpl implements ProductService{
                 return ProductMapper.mapToProductDto(existingProduct); // return the updated product DTO
             }
             // Handle case where the product ID is null or not found
-            // You can throw an exception or return an error message as needed
-            // For instance:
+
             throw new RuntimeException("Product not found with the given ID");
         }
         // Handle case where the product ID is null in the DTO
-        // You can throw an exception or return an error message as needed
-        // For instance:
         throw new RuntimeException("Product ID is null");
     }
 

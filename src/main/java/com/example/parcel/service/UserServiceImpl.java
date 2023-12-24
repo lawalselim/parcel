@@ -14,15 +14,12 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-
     private JWTService jwtService;
 
     private EncryptionService encryptionService;
     @Autowired
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JWTService jwtService, EncryptionService encryptionService) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.encryptionService =encryptionService;
 
@@ -69,6 +66,17 @@ public class UserServiceImpl implements UserService{
         user.setPassword(encryptionService.encryptPassword(userDto.getPassword()));
         userRepository.save(user);
         return userDto;
+    }
+
+    public UserDto loginUser(UserDto userDto){
+        Optional<User> userOptional = userRepository.findByEmail(userDto.getEmail());
+        if(userOptional.isPresent()) {
+            User user = userOptional.get();
+            if (encryptionService.verifyPassword(userDto.getPassword(),user.getPassword())) {
+                return jwtService.generateJWT(user);
+            }
+        }
+        return null;
     }
 
 }

@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService{
 
     private EncryptionService encryptionService;
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JWTService jwtService, EncryptionService encryptionService) {
+    public UserServiceImpl(UserRepository userRepository, JWTService jwtService, EncryptionService encryptionService) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
         this.encryptionService =encryptionService;
@@ -61,14 +61,13 @@ public class UserServiceImpl implements UserService{
     public UserDto registerUser(UserDto userDto) {
         // Register user logic
         User user = UserMapper.mapToUser(userDto);
-        //
         // user.setPassword(passwordEncoder.encode(userDto.getPassword())); // This line of code was testing the internally built encryption service with encoder
         user.setPassword(encryptionService.encryptPassword(userDto.getPassword()));
         userRepository.save(user);
         return userDto;
     }
 
-    public UserDto loginUser(UserDto userDto){
+    /*public UserDto loginUser(UserDto userDto){
         Optional<User> userOptional = userRepository.findByEmail(userDto.getEmail());
         if(userOptional.isPresent()) {
             User user = userOptional.get();
@@ -77,6 +76,17 @@ public class UserServiceImpl implements UserService{
             }
         }
         return null;
+    }
+
+     */
+
+    public UserDto loginUser(String email, String password) {
+        // Login user logic
+        User user = userRepository.findByEmail(email);
+        if (user != null && encryptionService.verifyPassword(password, user.getPassword())) {
+            return jwtService.generateJWT(user);
+        }
+        return null; // Or throw an exception as needed
     }
 
 }

@@ -24,6 +24,7 @@ public class AuthController {
      * @param userService
      */
     public AuthController( UserService userService) {
+
         this.userService = userService;
     }
 

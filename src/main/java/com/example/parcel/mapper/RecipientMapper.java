@@ -1,7 +1,6 @@
 package com.example.parcel.mapper;
 
 import com.example.parcel.dto.RecipientDto;
-import com.example.parcel.model.Recipient;
 
 public class RecipientMapper {
 

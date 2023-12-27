@@ -2,13 +2,10 @@ package com.example.parcel.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
-
+@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,10 +19,16 @@ public class ProductDto {
     @NotBlank(message = "Product description is required")
     private String productDescription;
     @NotBlank(message = "Product Price is require")
-    private String productPrice;
+    private double productPrice;
     @NotBlank(message = "Product category is required")
     private String productCategory;
-    //private List Cart;
+    @NotBlank(message = "Product Brand cannot be empty")
+    private String productBrand;
+    @NotBlank(message = "Image URL cannot be empty")
+    private String productImageUrl;
+    @NotBlank(message = "Number of items in stock cannot be empty")
+    private int stock;
+
 
 
 }

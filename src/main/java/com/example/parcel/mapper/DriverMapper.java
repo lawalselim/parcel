@@ -1,7 +1,6 @@
 package com.example.parcel.mapper;
 
 import com.example.parcel.dto.DriverDto;
-import com.example.parcel.model.Driver;
 
 public class DriverMapper {
     public static DriverDto mapToDriverDto(Driver driver){

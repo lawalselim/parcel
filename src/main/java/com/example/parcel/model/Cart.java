@@ -31,4 +31,7 @@ public class Cart {
 
     @Column(name = "quantity")
     private int quantity;
+
+    @ManyToOne
+    private Vendor vendor;
 }

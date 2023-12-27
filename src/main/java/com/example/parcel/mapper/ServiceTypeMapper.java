@@ -1,6 +1,6 @@
 package com.example.parcel.mapper;
 import com.example.parcel.dto.ServiceTypeDto;
-import com.example.parcel.model.ServiceType;
+
 public class ServiceTypeMapper {
     public static ServiceTypeDto mapToServiceTypeDto (ServiceType serviceType){
         return new ServiceTypeDto(

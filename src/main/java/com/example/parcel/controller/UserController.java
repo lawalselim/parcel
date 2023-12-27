@@ -4,6 +4,7 @@ import com.example.parcel.dto.UserDto;
 import com.example.parcel.exception.UserNotFoundException;
 import com.example.parcel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -11,8 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/users")
 public class  UserController {
     private final UserService userService;
+
+    private PasswordEncoder passwordEncoder;
     @Autowired
     public UserController(UserService userService) {
+
         this.userService = userService;
     }
 

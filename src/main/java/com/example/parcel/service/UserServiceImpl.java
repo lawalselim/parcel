@@ -1,36 +1,37 @@
 package com.example.parcel.service;
 import com.example.parcel.dto.UserDto;
+import com.example.parcel.exception.NotFoundException;
 import com.example.parcel.model.User;
 import com.example.parcel.repository.UserRepository;
 import com.example.parcel.mapper.UserMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.validation.*;
 
+import java.awt.print.Pageable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService{
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
+
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    private JWTService jwtService;
 
-    private EncryptionService encryptionService;
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JWTService jwtService, EncryptionService encryptionService) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.jwtService = jwtService;
-        this.encryptionService =encryptionService;
 
+    @Override
+    public List<User> getAll() {
+        final List<User> users = this.userRepository.findAll();
+        return users;
     }
 
-
-
-    public UserDto getUserById(Long id) {
+    /*public UserDto getUserById(Long id) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
@@ -38,6 +39,22 @@ public class UserServiceImpl implements UserService{
         }
         return null; // Or throw an exception as needed / add proper error message
 
+    }
+
+     */
+    @Override
+    public User getById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new NotFoundException("user couldn't be found by following id: " + id));
+    }
+
+    public List<User> slice(Pageable pageable){
+        final List<User> users = new ArrayList<>(this.userRepository.findAll());
+        return users;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        this.userRepository.deleteById(id);
     }
 
     public UserDto updateUser(UserDto userDto) {
@@ -60,41 +77,33 @@ public class UserServiceImpl implements UserService{
         existingUser.setAddress(userDto.getAddress());
         // Update other fields as needed
     }
-    public UserDto getUserByUserId(Long userId) {
-        Optional<User> userOptional = userRepository.findById(userId);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            return UserMapper.mapToUserDto(user);
-        }
-        return null; // Or throw an exception as needed
-    }
 
+
+
+
+}
+
+
+
+
+
+/*
     public UserDto registerUser(UserDto userDto) {
         // Register user logic
         User user = UserMapper.mapToUser(userDto);
-        //
-        // user.setPassword(passwordEncoder.encode(userDto.getPassword())); // This line of code was testing the internally built encryption service with encoder
-        user.setPassword(encryptionService.encryptPassword(userDto.getPassword()));
+        user.setPassword(passwordEncoder.encode(userDto.getPassword())); // Encrypt password
         userRepository.save(user);
         return userDto;
     }
-    public UserDto loginUser(UserDto userDto) {
+    public UserDto loginUser(String email, String password) {
         // Login user logic
-        User user = userRepository.findByEmail(userDto.getEmail());
-        if (user.isPresent()) {
-            User user = userRepository,get();
-        }
-
-        if (user != null && encryptionService.verifyPassword(userDto.getPassword(), user.getPassword())) {
-            return jwtService.generateJWT(user);
-        }
-        /*if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+        User user = userRepository.findByEmail(email);
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
             return UserMapper.mapToUserDto(user);
         }
-
-         */
         return null; // Or throw an exception as needed
     }
 
-    // Other user-related service methods
-}
+ */
+
+// Other user-related service methods

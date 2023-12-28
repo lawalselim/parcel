@@ -8,13 +8,15 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findByEmail(String email);
-    User findUserById(Long userId);
-    //add other custom queries here
-    User getById(Long id);
-    User findByUserName(String userName);
+public interface UserRepository extends JpaRepository<User, Integer> {
+
+    User getById(int id);
 
     @Query("from User where email=:email")
-    User findByEMail(String eMail);
+    User findByEmail(String email);
 }
+
+
+// User findByEmail(String email);
+// User findUserById(int userId);
+//add other custom queries here

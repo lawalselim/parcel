@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -16,36 +18,30 @@ public class User {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    @NotNull
-    @NotBlank
+
     @Column(name = "first_name")
     private String firstName;
 
-    @NotNull
-    @NotBlank
+
     @Column(name = "last_name")
     private String lastName;
 
-    @NotNull
-    @NotBlank
+
     @Column(name = "email",nullable = false, unique = true )
     @Email
     private String email;
 
-    @NotNull
-    @NotBlank
+
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @NotNull
-    @NotBlank
-    @Column(name = "address")
-    private String address;
 
-    @NotNull
-    @NotBlank
+    @OneToMany
+    private List<Address> address;
+
+
     @Size(min=6, max = 32)
     @Pattern( regexp= "\n" + "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,32}$\n") //regular expression used to provide strong password characteristics choice
     @Column(name = "password")

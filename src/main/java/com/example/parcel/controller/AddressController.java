@@ -20,10 +20,11 @@ public class AddressController {
         return ResponseEntity.ok(SysMessage.ADDRESS_CREATED);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("getAll")
     public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(addressService.getAll());
     }
+
 
     @DeleteMapping("deleteaddress/{id}")
     public ResponseEntity<?> deleteById(@PathVariable int id) {

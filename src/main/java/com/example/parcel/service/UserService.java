@@ -1,6 +1,7 @@
 package com.example.parcel.service;
 import com.example.parcel.dto.UserDto;
 import com.example.parcel.model.User;
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,15 +9,15 @@ import java.util.List;
 
 
 public interface UserService{
-    UserDto getUserById(Long userId);
-    User getById(Long id);
-    UserDto updateUser(UserDto userDto);
+    UserDto getUserById(int userId);
+    User getById(int id);
+   // UserDto updateUser(UserDto userDto);
     List<User> getAll();
-        // Other user-related methods{
-    UserDto registerUser(UserDto userDto);
-    UserDto loginUser(String email, String password);
-    void deleteById(Long id);
-    User findByEMail(String email);
-    //void authDeleteByUser(UserDeleteRequest userDeleteRequest);
+    void deleteById(int id);
+    User findByEmail(String email);
+    List<User> slice(Pageable pageable);
 
 }
+
+// UserDto registerUser(UserDto userDto);
+// UserDto loginUser(String email, String password);

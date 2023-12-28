@@ -23,7 +23,7 @@ public class AddressServiceImpl implements AddressService{
     }
 
     @Override
-    public List<Address> getALL(){
+    public List<Address>getAll(){
         return addressRepository.findAll();
     }
     @Override
@@ -32,7 +32,7 @@ public class AddressServiceImpl implements AddressService{
     }
 
     @Override
-    public List<Address> getAddressByUserId(Long userId) {
+    public List<Address> getAddressByUserId(int userId) {
         Optional<User> user = Optional.ofNullable(userService.getById(userId));
         List<Address> addressesResponse = new ArrayList<>();
 

@@ -1,0 +1,769 @@
+POST http://localhost:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 6
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+
+
+}
+
+<> 2023-12-28T205007.500.json
+
+###
+
+POST http://localhost:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 165
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "productName": "Lui Vitton",
+  "productDescription": "Special bag",
+  "productBrand": "Vitton",
+  "productPrice": "$400",
+  "stock": 4,
+  "category": "drinks"
+
+}
+
+<> 2023-12-28T204852.400.json
+
+###
+
+POST http://localhost:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 129
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "productName": "Lui Vitton",
+  "productDescription": "Special bag",
+  "productBrand": "Vitton",
+  "productPrice": "$400"
+
+}
+
+<> 2023-12-28T204302.400.json
+
+###
+
+GET http://localhost:8080/api/categories/getByCategoryName/drinks
+Content-Length: 26
+Content-Type: */*; charset=UTF-8
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+"categoryName":"jason"
+}
+
+<> 2023-12-28T203545.404.json
+
+###
+
+GET http://localhost:8080/api/categories/getByCategoryName(drinks)
+{:
+"categoryName": "jason"
+}:
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-28T203534.400.html
+
+###
+
+GET http://localhost:8080/api/categories/getByCategoryName/drinks
+{:
+"categoryName": "jason"
+}:
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-28T203504.400.html
+
+###
+
+GET http://localhost:8080/api/categories/getByCategoryName/drinks
+{:
+"categoryName: "jason"
+}:
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-28T203450.400.html
+
+###
+
+GET http://localhost:8080/api/categories/getByCategoryName/jason
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-28T203407.404.json
+
+###
+
+GET http://localhost:8080/api/categories/getByCategoryName/jason
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-28T203402.404.json
+
+###
+
+GET http://localhost:8080/api/categories/getByCategoryName
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-28T203349.200.json
+
+###
+
+POST http://localhost:8080/api/categories/add
+Content-Type: application/json
+Content-Length: 30
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "categoryName": "drinks"
+}
+
+<> 2023-12-28T202844.200.txt
+
+###
+
+POST http://localhost:8080/api/categories/add
+Content-Type: application/json
+Content-Length: 29
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "categoryName": "foods"
+}
+
+<> 2023-12-28T202827.200.txt
+
+###
+
+POST http://localhost:8080/api/categories/add
+Content-Type: application/json
+Content-Length: 29
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "categoryName": "foods"
+}
+
+<> 2023-12-28T202814.200.txt
+
+###
+
+POST http://localhost:8080/api/categories/add
+Content-Type: application/json
+Content-Length: 29
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "categoryName": "cloth"
+}
+
+<> 2023-12-28T202522.200.txt
+
+###
+
+POST http://localhost:8080/api/categories/add
+Content-Type: application/json
+Content-Length: 29
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "categoryName": "Jason"
+}
+
+<> 2023-12-28T202328.200.txt
+
+###
+
+POST http://localhost:8080/api/categories/add
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-28T202312.400.json
+
+###
+
+DELETE http://localhost:8080/api/users/delete
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-28T201337.500.json
+
+###
+
+GET http://localhost:8080/api/users/getAll
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-28T200654.200.json
+
+###
+
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+Content-Length: 148
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"firstName": "james",
+  "lastName": "baldwin",
+  "email": "test@test.com",
+  "address": "osun",
+  "password": "ogun1235",
+  "phoneNumber": "12345"}
+
+<> 2023-12-24T145440.500.json
+
+###
+
+POST http://localhost:8080/api/users/register
+Content-Type: application/json
+Content-Length: 158
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "firstName": "aminat",
+  "lastName": "oguns",
+  "email": "aminatogun@gmail.com",
+  "address": "osun",
+  "password": "ogun123",
+  "phoneNumber": "12345"
+
+}
+
+<> 2023-12-24T145320.405.json
+
+###
+
+POST http://localhost:8080/api/users/register
+Content-Type: application/json
+Content-Length: 158
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "firstName": "aminat",
+  "lastName": "oguns",
+  "email": "aminatogun@gmail.com",
+  "address": "osun",
+  "password": "ogun123",
+  "phoneNumber": "12345"
+
+}
+
+<> 2023-12-24T145315.405.json
+
+###
+
+POST http://localhost:8080/api/users/register
+Content-Type: application/json
+Content-Length: 159
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "firstName": "aminat",
+  "lastName": "oguns",
+  "email": "aminatogun@gmail.com",
+  "address": "osun",
+  "password": "ogun123",
+  "phoneNumber": "12345",
+
+}
+
+<> 2023-12-24T145258.405.json
+
+###
+
+POST http://localhost:8080/api/users/register
+Content-Type: application/json
+Content-Length: 159
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "firstName": "aminat",
+  "lastName": "oguns",
+  "email": "aminatogun@gmail.com",
+  "address": "osun",
+  "password": "ogun123",
+  "phoneNumber": "12345",
+
+}
+
+<> 2023-12-24T145245.405.json
+
+###
+
+PUT http://localhost:8080/api/products/3
+Content-Type: application/json
+Content-Length: 118
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "productPrice": "400",
+  "productCategory": "james",
+  "productDescription": "unknown",
+  "productName": "james"
+}
+
+<> 2023-11-22T232053.500.json
+
+###
+
+POST http://localhost:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 130
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "productName": "james Bond",
+  "productDescription": "casino royale",
+  "productCategory": "action",
+  "productPrice": "500"
+}
+
+<> 2023-11-22T231730.200.json
+
+###
+
+POST http://127.0.0.1:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 133
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"id": 1,
+  "productPrice": "200",
+  "productDescription": "movies",
+  "productName": "jason mamoa",
+  "productCategory": "moviesd"
+}
+
+<> 2023-11-22T231611.200.json
+
+###
+
+POST http://127.0.0.1:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 132
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"id": 1,
+  "productPrice": "200",
+  "productDescription": "movies",
+  "productName": "jason mamoa",
+  "productCategory": "movies"
+}
+
+<> 2023-11-22T231547.200.json
+
+###
+
+POST http://127.0.0.1:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 132
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"id": 1,
+  "productPrice": "200",
+  "productDescription": "movies",
+  "productName": "jason mamoa",
+  "productCategory": "movies"
+}
+
+<> 2023-11-22T231353.200.json
+
+###
+
+POST http://127.0.0.1:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 132
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"id": 1,
+  "productPrice": "200",
+  "productDescription": "movies",
+  "productName": "jason mamoa",
+  "productCategory": "movies"
+}
+
+<> 2023-11-22T230352.200.json
+
+###
+
+POST http://localhost:8080/api/users/register
+Content-Type: application/json
+Content-Length: 161
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "firstName": "aminat",
+  "lastName": "oguns",
+  "email": "aminatogun@gmail.com",
+  "address": "osun",
+  "password": "ogun123",
+  "phoneNumber": "12345",
+
+}
+
+<> 2023-11-20T192431.400.json
+
+###
+
+POST http://localhost:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 129
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "productName": "jason Bourne",
+  "productCategory": "movies",
+  "productDescription": "war movies",
+  "productPrice": "300"
+}
+
+<> 2023-11-20T192258.200.json
+
+###
+
+POST http://localhost:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 129
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "productName": "selim",
+  "productDescription": "just another type",
+  "productCategory": "books",
+  "productPrice": "#500"
+}
+
+<> 2023-11-20T191550.200.json
+
+###
+
+POST http://localhost:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 122
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "productName": "selim",
+  "productPrice": "500",
+  "productCategory": "books",
+  "productDescription": "just a test"
+}
+
+<> 2023-11-20T191025.200.json
+
+###
+
+POST http://localhost:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 118
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "productName": "selim",
+  "productDescription": "bashlaw",
+  "productCategory": "books",
+  "productPrice": "200"
+}
+
+<> 2023-11-20T190926.200.json
+
+###
+
+POST http://localhost:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 118
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "productName": "selim",
+  "productDescription": "bashlaw",
+  "productCategory": "books",
+  "productPrice": "200"
+}
+
+<> 2023-11-20T190654.200.json
+
+###
+
+GET http://127.0.0.1:8080/api/products/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
+POST http://127.0.0.1:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 120
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"id": "1",
+"productName": "James",
+"productDescription": "unknown",
+"productCategory": "books",
+"productPrice": "200"
+}
+
+<> 2023-11-20T162358.200.json
+
+###
+
+POST http://localhost:8080/api/users/login
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-20T161937.400.json
+
+###
+
+POST http://localhost:8080/api/users/login
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-20T161930.400.json
+
+###
+
+POST http://127.0.0.1:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 120
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"id": "1",
+"productName": "James",
+"productDescription": "unknown",
+"productCategory": "books",
+"productPrice": "200"
+}
+
+<> 2023-11-20T161223.200.json
+
+###
+
+PUT http://127.0.0.1:8080/api/users/1
+Content-Type: application/json
+Content-Length: 49
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "firstName": "Lawal",
+  "lastName": "selim"
+}
+
+<> 2023-11-20T155828.500.json
+
+###
+
+GET http://127.0.0.1:8080/api/users/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-20T155827.200.json
+
+###
+
+POST http://127.0.0.1:8080/api/users/register
+Content-Type: application/json
+Content-Length: 177
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "firstName": "selim",
+  "lastName": "lawal",
+  "email": "lawalselim0@gmail.com",
+  "phoneNumber": "2348155683218",
+  "address": "no9 pine road",
+  "password": "selimlawal"
+}
+
+<> 2023-11-20T155827-1.500.json
+
+###
+
+PUT http://127.0.0.1:8080/api/users/1
+Content-Type: application/json
+Content-Length: 9
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"id": 1}
+
+<> 2023-11-20T155827.500.json
+
+###
+
+POST http://127.0.0.1:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 6
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+
+}
+
+<> 2023-11-20T155826.200.json
+
+###
+
+POST http://127.0.0.1:8080/api/products/create-product
+Content-Type: application/json
+Content-Length: 6
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+
+}
+
+<> 2023-11-20T155819.200.json
+
+###
+
+PUT http://127.0.0.1:8080/api/users/1
+Content-Type: application/json
+Content-Length: 49
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "firstName": "Lawal",
+  "lastName": "selim"
+}
+
+<> 2023-11-16T221825.500.json
+
+###
+
+GET http://127.0.0.1:8080/api/users/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-15T171717.200.json
+
+###
+
+PUT http://127.0.0.1:8080/api/users/1
+Content-Type: application/json
+Content-Length: 9
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"id": 1}
+
+<> 2023-11-15T171648.500.json
+
+###
+
+POST http://127.0.0.1:8080/api/users/register
+Content-Type: application/json
+Content-Length: 177
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "firstName": "selim",
+  "lastName": "lawal",
+  "email": "lawalselim0@gmail.com",
+  "phoneNumber": "2348155683218",
+  "address": "no9 pine road",
+  "password": "selimlawal"
+}
+
+<> 2023-11-15T171232.500.json
+
+###
+

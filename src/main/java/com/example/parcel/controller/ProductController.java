@@ -4,11 +4,9 @@ import com.example.parcel.Messages.SysMessage;
 import com.example.parcel.dto.ProductDto;
 import com.example.parcel.model.Product;
 import com.example.parcel.service.ProductService;
-import org.springframework.data.domain.Pageable;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
-@Validated
+@CrossOrigin
 public class ProductController {
 
     /*Product API functionality goes here
@@ -77,7 +75,7 @@ public class ProductController {
         this.productService.deleteById(id);
         return ResponseEntity.ok(SysMessage.PRODUCT_DELETED);
     }
-
+//create product section needs modification
     @PostMapping("/create-product")
     public ProductDto createProduct (@RequestBody  ProductDto productDto){
         return productService.createProduct(productDto);

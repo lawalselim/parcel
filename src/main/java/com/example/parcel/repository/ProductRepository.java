@@ -10,6 +10,6 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
     List<Product> getByproductName(String productName);
     List<Product> getByproductBrand(String productBand);
 
-    void deleteBy(int id);
+    void deleteById(int id);
 
 }

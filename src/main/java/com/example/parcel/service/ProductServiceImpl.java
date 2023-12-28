@@ -1,73 +1,97 @@
 package com.example.parcel.service;
-import com.example.parcel.dto.ProductDto;
+import com.example.parcel.exception.NotFoundException;
+import com.example.parcel.model.Cart;
 import com.example.parcel.model.Product;
+import com.example.parcel.dto.ProductDto;
 import com.example.parcel.repository.ProductRepository;
-import com.example.parcel.mapper.ProductMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import com.example.parcel.service.CartService;
+import java.util.List;
 import  java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
-    private final ProductRepository productRepository;
 
-    @Autowired
-    public ProductServiceImpl(ProductRepository productRepository){
-        this.productRepository = productRepository;
+    private final ProductRepository productRepository;
+    private final CartService cartService;
+
+    @Override
+    public List<Product> getAll() {
+        return this.productRepository.findAll();
     }
 
-    //section focuses on creating new product
-    public ProductDto createProduct (ProductDto productDto){
-     //create product logic
-        Product product = ProductMapper.mapToProduct(productDto);
-        productRepository.save(product);
+
+    @Override
+    public Product getById(int id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("product couldn't be found by following id: " + id));
+        return product;
+    }
+    @Override
+    public ProductDto createProduct(ProductDto productDto) {
+        this.productRepository.save(new Product(productDto.getProductName(), productDto.getProductBrand(),
+                productDto.getProductDescription(), productDto.getProductPrice(), productDto.getStock(), productDto.getProductImageUrl()));
         return productDto;
     }
 
-    //Get All product
-
-   /* public Iterable<Product> getAllProducts() {
-
-        return productRepository.findAll();
+    @Override
+    public void deleteById(int id) {
+        this.productRepository.deleteById(id);
     }
 
-    */
-    //section focuses on getting product by id
-    public ProductDto getProductById ( Long id){
-        Optional<Product> productOptional = productRepository.findById(id);
-        if(productOptional.isPresent()){
-            Product product = productOptional.get();
-            return ProductMapper.mapToProductDto(product);
+    @Override
+    public List<Product> slice(Pageable pageable) {
+        final List<Product> products = this.productRepository.findAll(pageable).stream().collect(Collectors.toList());
+        return products;
+    }
+
+    @Override
+    public List<Product> getByproductName(String productName) {
+        return this.productRepository.getByproductName(productName);
+    }
+
+    @Override
+    public List<Product> getByproductBrand(String productBrand) {
+        return this.productRepository.getByproductBrand(productBrand);
+    }
+
+
+    @Override
+    public Cart addToCart(int id) {
+        Product product = productRepository.getById(id);
+        Cart cart = new Cart();
+        cart.setId(product.getId());
+        cart.setProductBrand(product.getProductBrand());
+        cart.setProductName(product.getProductName());
+        cart.setProductDescription(product.getProductDescription());
+        cart.setProductPrice(product.getProductPrice());
+        cart.setProductImageUrl(product.getProductImageUrl());
+        cart.setVendor(product.getVendor());
+        cart.setQuantity(0);
+
+        cart.setQuantity(cart.getQuantity() + 1);
+        product.setStock(product.getStock() - 1);
+
+        if(product.getStock() == 0) {
+            productRepository.deleteById(product.getId());
         }
-        return null;// or add proper error message
+        cartService.addtoCart(cart);
+
+        return cart;
     }
 
-    //product update states here
-
-    public ProductDto updateProduct(ProductDto productDto) {
-        if (productDto.getId() != null) {
-            Optional<Product> productOptional = productRepository.findById(productDto.getId());
-            if (productOptional.isPresent()) {
-                Product existingProduct = productOptional.get();
-                updateProductFields(existingProduct, productDto);
-                productRepository.save(existingProduct);
-                return ProductMapper.mapToProductDto(existingProduct); // return the updated product DTO
-            }
-            // Handle case where the product ID is null or not found
-
-            throw new RuntimeException("Product not found with the given ID");
-        }
-        // Handle case where the product ID is null in the DTO
-        throw new RuntimeException("Product ID is null");
+    @Override
+    public List<Cart> getCart() {
+        return cartService.getAll();
     }
 
-
-    private void updateProductFields( Product existingProduct, ProductDto productDto){
-        existingProduct.setProductName(productDto.getProductName());
-        existingProduct.setProductDescription(productDto.getProductDescription());
-        existingProduct.setProductCategory(productDto.getProductCategory());
-        existingProduct.setProductPrice(productDto.getProductPrice());
+    @Override
+    public void removeFromCart(int id) {
+        Cart cart = cartService.getById(id);
+        cartService.deleteById(cart.getId());
     }
-    //Add more service functionality like delete product
 
 }

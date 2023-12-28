@@ -18,7 +18,7 @@ public class Product {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "product_name" )
     private String productName;
@@ -33,13 +33,18 @@ public class Product {
     @Min(value = 1, message = "{com.eCommerceProject.Min.stock.message}")
     @Column(name = "stock")
     private int stock;
-    @Column(name = "product_category")
-    private String productCategory;
     @ManyToOne
     private Category category;
     @ManyToOne
     private Vendor vendor;
 
 
-
+    public Product(String productName, String productBrand, String productDescription, double productPrice, int stock, String productImageUrl) {
+        this.productName = productName;
+        this.productBrand = productBrand;
+        this.productDescription = productDescription;
+        this.productPrice = productPrice;
+        this.stock = stock;
+        this.productImageUrl = productImageUrl;
+    }
 }

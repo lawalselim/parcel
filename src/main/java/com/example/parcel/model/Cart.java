@@ -14,23 +14,27 @@ import java.util.Set;
 @Entity
 @Table(name = "cart")
 public class Cart {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "product_id")
-    @ToString.Exclude
-    private Product product;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id")
-    @ToString.Exclude
-    private User user;
+    private Integer id;
 
     @Column(name = "quantity")
     private int quantity;
+
+    @Column(name = "productName")
+    private String productName;
+
+    @Column(name = "productBrand")
+    private String productBrand;
+
+    @Column(name = "productDetails")
+    private String productDescription;
+
+    @Column(name = "productPrice")
+    private double productPrice;
+
+    @Column(name = "productImageUrl")
+    private String productImageUrl;
 
     @ManyToOne
     private Vendor vendor;

@@ -2,12 +2,16 @@ package com.example.parcel.controller;
 
 import com.example.parcel.Messages.SysMessage;
 import com.example.parcel.dto.ProductDto;
+import com.example.parcel.model.Product;
 import com.example.parcel.service.ProductService;
+import org.springframework.data.domain.Pageable;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController
@@ -30,27 +34,48 @@ public class ProductController {
         this.productService = productService;
     }
 
+   @GetMapping("getById/{id}")
+   public ResponseEntity<?> getById(@PathVariable int id) {
+       return ResponseEntity.ok(productService.getById(id));
+   }
 
-   /* @GetMapping("/")
-    public Iterable<ProductDto> getProducts(){
-        return productService.getAllProducts;
-    }
-
-    */
-    @GetMapping("/{id}")
-    public ProductDto getProductById (@PathVariable Long id){
-        return productService.getProductById(id);
-
-    }
-
-    @PutMapping("/{id}")
-    public ProductDto updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto){
-        if (productDto.getId().equals(id)){
-            return productService.updateProduct(productDto);
-        }else{
-            return null;//rework here for proper error message
+    @GetMapping("getAll")
+    public ResponseEntity<?> getAll() {
+        final List<Product> products = productService.getAll();
+        if(products.size() <= 0) {
+            return ResponseEntity.ok(SysMessage.PRODUCT_NOT_FOUND);
         }
+        return ResponseEntity.ok(products);
+    }
 
+    @GetMapping("getByProductName/{productName}")
+    public ResponseEntity<?> getByproductName(@PathVariable String productName) {
+        String productsName = "";
+        List<Product> products = this.productService.getByproductName(productName);
+        for(Product product: products) {
+            productsName = product.getProductName();
+        }
+        if(!productName.equals(productsName)) {
+            return ResponseEntity.ok(SysMessage.NOT_FOUND_THIS_NAME);
+        }
+        return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("getByProductBrand/{productBrand}")
+    public List<Product> getByproductBrand(@PathVariable String productBrand) {
+        return this.productService.getByproductBrand(productBrand);
+    }
+
+    @GetMapping("slice")
+    public ResponseEntity<List<Product>> slice(Pageable pageable) {
+        final List<Product> products = this.productService.slice(pageable);
+        return ResponseEntity.ok(products);
+    }
+
+    @DeleteMapping("deleteById/{id}")
+    public ResponseEntity<?> deleteByid(@PathVariable int id) {
+        this.productService.deleteById(id);
+        return ResponseEntity.ok(SysMessage.PRODUCT_DELETED);
     }
 
     @PostMapping("/create-product")

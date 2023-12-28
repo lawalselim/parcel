@@ -20,8 +20,6 @@ public class ProductDto {
     private String productDescription;
     @NotBlank(message = "Product Price is require")
     private double productPrice;
-    @NotBlank(message = "Product category is required")
-    private String productCategory;
     @NotBlank(message = "Product Brand cannot be empty")
     private String productBrand;
     @NotBlank(message = "Image URL cannot be empty")

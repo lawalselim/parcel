@@ -63,11 +63,17 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    //TODO: 1. Add appropriate error message for when the specified productname is not found during search
+    //TODO: 2. the error message should take response from SysMessage.
+
     @GetMapping("searchByProduct/{productName}")
     public ResponseEntity<?> searchByProduct(@PathVariable String productName) {
         Map<Integer, Object> result = productService.searchByProduct(productName);
         return ResponseEntity.ok(result);
     }
+
+    //TODO: 1. Add appropriate error message for when the specified brand  is not found
+    //TODO: 2. the error message should take response from SysMessage.
 
     @GetMapping("getByProductBrand/{productBrand}")
     public List<Product> getByproductBrand(@PathVariable String productBrand) {

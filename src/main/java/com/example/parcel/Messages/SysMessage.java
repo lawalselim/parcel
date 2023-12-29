@@ -20,7 +20,7 @@ public interface SysMessage {
 
     String EMAIL_ALREADY_IN_USE = "Email Already In Use!";
 
-    String REGISTER_TOPIC = "Welcome To Tiklakapinda";
+    String REGISTER_TOPIC = "Welcome To Parcel Project";
 
     String REGISTER_BODY = "We are happy to have you among us, you are sure to find great discount deals";
 

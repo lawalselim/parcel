@@ -2,11 +2,13 @@ package com.example.parcel.controller;
 
 import com.example.parcel.Messages.SysMessage;
 import com.example.parcel.dto.ProductDto;
+import com.example.parcel.dto.ProductUpdateDto;
 import com.example.parcel.model.Product;
 import com.example.parcel.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -98,6 +100,18 @@ public class ProductController {
         return ResponseEntity.ok(SysMessage.PRODUCT_SAVED);
     }
 
+    //TODO: 1.test product update functionality
+    @PutMapping("/update-product-details")
+    public ResponseEntity<?> updateByProductDetails(@PathVariable int productId, @RequestBody ProductUpdateDto productUpdateDto) {
+        productUpdateDto.setProductId(productId); // Set the productId from the path variable to the DTO
+
+        try {
+            productService.updateByProductDetails(productUpdateDto);
+            return ResponseEntity.ok("Product updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update product: " + e.getMessage());
+        }
+    }
 
     /*Cart API functionality goes here
      Key functionality

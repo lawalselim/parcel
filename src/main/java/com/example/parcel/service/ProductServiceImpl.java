@@ -1,4 +1,5 @@
 package com.example.parcel.service;
+import com.example.parcel.dto.ProductUpdateDto;
 import com.example.parcel.exception.NotFoundException;
 import com.example.parcel.model.Cart;
 import com.example.parcel.model.Product;
@@ -40,6 +41,28 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteById(int id) {
         this.productRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateByProductDetails(ProductUpdateDto productUpdateDto) {
+        Optional<Product> productOptional = productRepository.findById(productUpdateDto.getProductId());
+
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+
+            // Update product details from the ProductUpdateDto
+            product.setProductName(productUpdateDto.getProductName());
+            product.setProductDescription(productUpdateDto.getProductDescription());
+            product.setProductPrice(productUpdateDto.getProductPrice());
+            product.setProductBrand(productUpdateDto.getProductBrand());
+            product.setProductImageUrl(productUpdateDto.getProductImageUrl());
+            product.setStock(productUpdateDto.getStock());
+            product.setVendor(productUpdateDto.getVendor());
+            product.setCategory(productUpdateDto.getCategory());
+
+            // Save the updated product
+            productRepository.save(product);
+        }
     }
 
     @Override

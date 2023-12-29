@@ -4,12 +4,14 @@ import com.example.parcel.Messages.SysMessage;
 import com.example.parcel.dto.ProductDto;
 import com.example.parcel.model.Product;
 import com.example.parcel.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -23,6 +25,8 @@ public class ProductController {
      2. Find product by id
      3. update product details
      4. Delete Product
+     5. Search by product Name
+     6.
      */
 
     private final ProductService productService;
@@ -59,6 +63,12 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    @GetMapping("searchByProduct/{productName}")
+    public ResponseEntity<?> searchByProduct(@PathVariable String productName) {
+        Map<Integer, Object> result = productService.searchByProduct(productName);
+        return ResponseEntity.ok(result);
+    }
+
     @GetMapping("getByProductBrand/{productBrand}")
     public List<Product> getByproductBrand(@PathVariable String productBrand) {
         return this.productService.getByproductBrand(productBrand);
@@ -77,8 +87,9 @@ public class ProductController {
     }
 //create product section needs modification
     @PostMapping("/create-product")
-    public ProductDto createProduct (@RequestBody  ProductDto productDto){
-        return productService.createProduct(productDto);
+    public ResponseEntity<?> createProduct(@RequestBody @Valid ProductDto productDto) {
+        this.productService.createProduct(productDto);
+        return ResponseEntity.ok(SysMessage.PRODUCT_SAVED);
     }
 
 
@@ -86,6 +97,7 @@ public class ProductController {
      Key functionality
      1. Add to cart by id
      2. Remove from cart id
+     3. Get cart
 
      */
 
@@ -99,9 +111,35 @@ public class ProductController {
         return ResponseEntity.ok(SysMessage.ADD_TO_CART);
     }
 
+
     @DeleteMapping("removeFromCart/{id}")
     public ResponseEntity<?> removeFromCart(@PathVariable int id) {
         productService.removeFromCart(id);
         return ResponseEntity.ok(SysMessage.REMOVE_FROM_CART);
+    }
+
+    /* Product Favourite  API functionality goes here
+        Key functionality
+        1. Remove from favourite
+        2. Add to favourite
+        3. Get total number of favourite
+        4.
+
+        */
+    @PutMapping("addFavorite/{productId}")
+    public ResponseEntity<?> addFavorite(@PathVariable("productId") int productId) {
+        productService.addFavorite(productId);
+        return ResponseEntity.ok(SysMessage.ADDED_TO_FAVORITES);
+    }
+
+    @GetMapping("getNumberOfFavorite/{productId}")
+    public ResponseEntity<?> getNumberOfFavorite(@PathVariable("productId") int productId) {
+        return ResponseEntity.ok(productService.getNumberOfFavorite(productId));
+    }
+
+    @PutMapping("removeFromFavorite/{productId}")
+    public ResponseEntity<?> removeFromFavorite(@PathVariable("productId") int productId) {
+        productService.removeFromFavorites(productId);
+        return ResponseEntity.ok(SysMessage.REMOVE_FROM_FAVORITES);
     }
 }

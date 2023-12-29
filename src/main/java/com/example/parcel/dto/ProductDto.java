@@ -1,6 +1,6 @@
 package com.example.parcel.dto;
 
-import jakarta.validation.constraints.Min;
+
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
@@ -12,8 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 
 public class ProductDto {
-    @Min(value = 1, message = "Id must be greater than zero")
-    private Long id;
+
     @NotBlank(message = "Product name is required")
     private String productName;
     @NotBlank(message = "Product description is required")

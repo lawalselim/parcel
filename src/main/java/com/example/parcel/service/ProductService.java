@@ -20,14 +20,11 @@ public interface ProductService {
     Cart addToCart(int id);
     List<Cart> getCart();
     void removeFromCart(int id);
-    //ConfirmedOrder confirmCart(ConfirmCartRequest confirmCartRequest);
-    //List<ConfirmedOrder> getAllConfirmedOrder();
-    //ConfirmedOrder getConfirmedOrderById(int id);
-   //ConfirmedOrder getConfirmedOrderByOrderNumber(Long orderNumber);
-    //Map<Integer, Object> searchByProduct(String productName);
-   // void addFavorite(int productId);
-   // int getNumberOfFavorite(int productId);
-   // void removeFromFavorites(int productId);
+
+    Map<Integer, Object> searchByProduct(String productName);
+   void addFavorite(int productId);
+   int getNumberOfFavorite(int productId);
+   void removeFromFavorites(int productId);
 
 
 

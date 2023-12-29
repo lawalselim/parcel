@@ -7,9 +7,9 @@ import com.example.parcel.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import com.example.parcel.service.CartService;
-import java.util.List;
-import  java.util.Optional;
+
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -92,6 +92,51 @@ public class ProductServiceImpl implements ProductService {
     public void removeFromCart(int id) {
         Cart cart = cartService.getById(id);
         cartService.deleteById(cart.getId());
+    }
+
+    @Override
+    public Map<Integer, Object> searchByProduct(String productName) {
+        Map<Integer, Object> searchResult = new HashMap<>();
+        List<Product> products = new ArrayList<>();
+
+        for (Product product : productRepository.findAll()) {
+            if (product.getProductName().contains(productName)) {
+                products.add(product);
+                searchResult.put(products.size(), products);
+                return searchResult;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void addFavorite(int productId) {
+        Optional<Product> product = productRepository.findById(productId);
+
+        if (product.isPresent()) {
+            product.get().setFavoriteNumber(product.get().getFavoriteNumber() + 1);
+            productRepository.save(product.get());
+        } else {
+            throw new NotFoundException("product couldn't be found by following id: " + productId);
+        }
+
+    }
+
+    @Override
+    public int getNumberOfFavorite(int productId) {
+        return productRepository.findById(productId).get().getFavoriteNumber();
+    }
+
+    @Override
+    public void removeFromFavorites(int productId) {
+        Optional<Product> product = productRepository.findById(productId);
+
+        if (product.isPresent()) {
+            product.get().setFavoriteNumber(product.get().getFavoriteNumber() - 1);
+            productRepository.save(product.get());
+        } else {
+            throw new NotFoundException("product couldn't be found by following id: " + productId);
+        }
     }
 
 }

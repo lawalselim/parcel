@@ -18,7 +18,7 @@ public class Product {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "product_name" )
     private String productName;
@@ -37,6 +37,9 @@ public class Product {
     private Category category;
     @ManyToOne
     private Vendor vendor;
+    @Column(name = "favoriteNumber")
+    @Min(value = 0)
+    private int favoriteNumber = 0;
 
 
     public Product(String productName, String productBrand, String productDescription, double productPrice, int stock, String productImageUrl) {

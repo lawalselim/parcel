@@ -30,7 +30,7 @@ public class Product {
     private double productPrice;
     @Column(name = "image")
     private String productImageUrl;
-    @Min(value = 1, message = "{com.eCommerceProject.Min.stock.message}")
+    @Min(value = 1, message = "{com.example.parcel.Min.stock.message}")
     @Column(name = "stock")
     private int stock;
     @ManyToOne

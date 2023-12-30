@@ -1,9 +1,8 @@
 package com.example.parcel.controller;
+
 import com.example.parcel.Messages.SysMessage;
 import com.example.parcel.model.Category;
 import com.example.parcel.service.CategoryService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -18,13 +18,22 @@ public class Vendor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private int id;
     @Column(name = "full_name", nullable = false )
     private String fullName;
-    /*mapping product to vendor as product are created by vendor which are available to be sold to the user
+
+    @Column(name = "profilePictureUrl")
+    private String profilePictureUrl;
+
+    @Column(name = "email")
+    private String email;
+
     @OneToMany(mappedBy = "vendor")
-    @ToString.Exclude
     private List <Product> product;
 
-     */
+    public Vendor(String fullName, String profilePictureUrl, String email){
+        this.fullName = fullName;
+        this.profilePictureUrl = profilePictureUrl;
+        this.email = email;
+    }
 }

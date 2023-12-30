@@ -1,5 +1,9 @@
 package com.example.parcel.dto;
 
+import com.example.parcel.model.Product;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +16,23 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VendorDto {
-    private Integer ID;
+
+
+    @NotNull
     private String fullName;
-   // private List product;
+
+
+    private String profilePictureUrl;
+
+    @NotNull
+    @Email
+    private String email;
+
+    private Product  product;
+
+    public VendorDto(String fullName, String profilePictureUrl, String email){
+        this.fullName = fullName;
+        this.profilePictureUrl = profilePictureUrl;
+        this.email = email;
+    }
 }

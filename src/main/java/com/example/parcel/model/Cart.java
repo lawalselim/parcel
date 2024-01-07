@@ -1,11 +1,10 @@
 package com.example.parcel.model;
 
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -37,5 +36,5 @@ public class Cart {
     private String productImageUrl;
 
     @ManyToOne
-    private Vendor vendor;
+    private User user;
 }

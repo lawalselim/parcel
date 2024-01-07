@@ -1,17 +1,18 @@
 package com.example.parcel.service;
+import com.example.parcel.Request.UserDeleteRequest;
 import com.example.parcel.dto.UserDto;
+import com.example.parcel.dto.UserViewDto;
 import com.example.parcel.exception.NotFoundException;
-import com.example.parcel.mapper.UserMapper;
+import com.example.parcel.Request.UserCreateRequest;
 import com.example.parcel.model.User;
-import com.example.parcel.repository.AddressRepository;
 import com.example.parcel.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,10 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-
-    private final AddressRepository addressRepository;
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
 
 
@@ -31,17 +29,6 @@ public class UserServiceImpl implements UserService {
     public List<User> getAll() {
         final List<User> users = this.userRepository.findAll();
         return users;
-    }
-
-    //two findbyid implementation don't forget to delete one across userservice, userrepository
-    public UserDto getUserById(int id) {
-        Optional<User> userOptional = userRepository.findById(id);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            return UserMapper.mapToUserDto(user);
-        }
-        return null; // Or throw an exception as needed / add proper error message
-
     }
 
     @Override
@@ -86,6 +73,23 @@ public class UserServiceImpl implements UserService {
         // Update other fields as needed
     }
 
+    @Override
+    public List<UserViewDto> getUserViewDto() {
+        final List<UserViewDto> users = this.userRepository.findAll().stream().map(UserViewDto::of).collect(Collectors.toList());
+        return users;
+    }
+    @Override
+    public User add(User userCreateDto) {
+        this.userRepository.save(new User(userCreateDto.getUserName(), userCreateDto.getFirstName(), userCreateDto.getLastName(),
+                userCreateDto.getPassword(), userCreateDto.getPhoneNumber(), userCreateDto.getEmail(), userCreateDto.getUserCreateDate(), userCreateDto.isNotificationPermission()));
+        return userCreateDto;
+    }
+
+    @Override
+    public void authDeleteByUser(UserDeleteRequest userDeleteRequest) {
+        User user = userRepository.findByEmail(userDeleteRequest.getEmail());
+        userRepository.deleteById(user.getId());
+    }
 
 
 
@@ -95,23 +99,7 @@ public class UserServiceImpl implements UserService {
 
 
 
-/*
-    public UserDto registerUser(UserDto userDto) {
-        // Register user logic
-        User user = UserMapper.mapToUser(userDto);
-        user.setPassword(passwordEncoder.encode(userDto.getPassword())); // Encrypt password
-        userRepository.save(user);
-        return userDto;
-    }
-    public UserDto loginUser(String email, String password) {
-        // Login user logic
-        User user = userRepository.findByEmail(email);
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            return UserMapper.mapToUserDto(user);
-        }
-        return null; // Or throw an exception as needed
-    }
 
- */
 
-// Other user-related service methods
+
+

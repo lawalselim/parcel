@@ -1,23 +1,25 @@
 package com.example.parcel.service;
+import com.example.parcel.Request.UserDeleteRequest;
 import com.example.parcel.dto.UserDto;
+import com.example.parcel.dto.UserViewDto;
 import com.example.parcel.model.User;
 import org.springframework.data.domain.Pageable;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 
 public interface UserService{
-    UserDto getUserById(int userId);
+    User add(User createDto);
     User getById(int id);
-   // UserDto updateUser(UserDto userDto);
+    void authDeleteByUser(UserDeleteRequest userDeleteRequest);
     List<User> getAll();
     void deleteById(int id);
     User findByEmail(String email);
     List<User> slice(Pageable pageable);
 
-}
+    User getByUserName(String userName);
 
-// UserDto registerUser(UserDto userDto);
-// UserDto loginUser(String email, String password);
+    List<UserViewDto> getUserViewDto();
+    void updateByUserName(int userId, String userName);
+    void updateByNotificationPermission(int userId, boolean permission);
+}

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -20,6 +21,9 @@ public class User {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotNull(message = "{com.example.parcel.notnull.username.message}")
+    @Column(name = "username")
+    private String userName;
 
     @Column(name = "first_name")
     private String firstName;
@@ -36,8 +40,10 @@ public class User {
 
     @Column(name = "phone_number")
     private String phoneNumber;
-
-
+    @Column(name = "createDate")
+    private Date userCreateDate;
+    @Column(name = "notificationPermission")
+    private boolean notificationPermission = true;
     @OneToMany
     private List<Address> address;
 
@@ -45,25 +51,19 @@ public class User {
     @Size(min=6, max = 32)
     @Pattern( regexp= "\n" + "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,32}$\n") //regular expression used to provide strong password characteristics choice
     @Column(name = "password")
+    @NotNull(message = "{com.example.parcel.notnull.password.message}")
     private String password;
 
-    /*
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private Role role;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
-    @ToString.Exclude
-    private User user;
-
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL, CascadeType.PERSIST})
-    @ToString.Exclude
-    private List<Cart> carts;
-
-    @OneToMany(mappedBy = "user")
-    @ToString.Exclude
-    private List<Order> orders;
-    /
-     */
+    public User(String userName,String firstName,String lastName, String password, String email,String phoneNumber, Date userCreateDate, boolean notificationPermission) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.userCreateDate = userCreateDate;
+        this.notificationPermission = notificationPermission;
+    }
 
 }

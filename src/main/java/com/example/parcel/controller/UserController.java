@@ -1,6 +1,7 @@
 package com.example.parcel.controller;
 
 import com.example.parcel.dto.UserDto;
+import com.example.parcel.dto.UserViewDto;
 import com.example.parcel.model.User;
 import com.example.parcel.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +43,12 @@ public class  UserController {
         return ResponseEntity.ok(new GenericResponse("User deleted..."));
     }
 
+    @GetMapping("getDto")
+    public ResponseEntity<List<UserViewDto>> getDto() {
+        List<UserViewDto> users = this.userService.getUserViewDto();
+        return ResponseEntity.ok(users);
+    }
+
 }
 
 
@@ -64,30 +71,5 @@ public class  UserController {
 
 
 
- /* @PutMapping("/{id}")
-    public UserDto updateUser(@PathVariable int id, @RequestBody UserDto userDto) {
-        if (userDto.getId().equals(id)) {
-            return userService.updateUser(userDto);
-        } else {
-
-            throw new UserNotFoundException("User not Found");
-        }
-
-    }
-
-    */
 
 
-
-
-  /*  @PostMapping("/register")
-    public UserDto registerUser(@RequestBody UserDto userDto) {
-        return userService.registerUser(userDto);
-    }
- @PostMapping("/login")
- public UserDto loginUser(@RequestParam String email, @RequestParam String password) {
-     return userService.loginUser(email, password);
- }
-
-   */
-// Other user-related endpoints

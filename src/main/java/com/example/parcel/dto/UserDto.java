@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserDto {
     private int id;
+    private String userName;
     private String firstName;
     private String lastName;
     private String email;
@@ -27,5 +28,6 @@ public class UserDto {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
 }

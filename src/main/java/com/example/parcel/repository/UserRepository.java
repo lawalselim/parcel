@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     User getById(int id);
-   // User findByUserName(String userName);
+   User findByUserName(String userName);
 
     @Query("from User where email=:email")
     User findByEmail(String email);

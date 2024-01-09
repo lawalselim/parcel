@@ -1,6 +1,8 @@
-package com.example.parcel.configuration;
+package com.example.parcel.security;
 
 import com.example.parcel.model.User;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@Getter
+@Setter
 public class JwtUserDetails implements UserDetails {
     public int id;
     private String userName;

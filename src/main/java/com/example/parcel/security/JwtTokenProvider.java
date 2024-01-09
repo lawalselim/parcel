@@ -1,7 +1,7 @@
-package com.example.parcel.configuration;
+package com.example.parcel.security;
 
 import io.jsonwebtoken.*;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -9,10 +9,10 @@ import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
-    @Value("${eCommerce.app.secret}")
+    @Value("${parcel.app.secret}")
     private String APP_SECRET;
 
-    @Value("${eCommerce.expires.in}")
+    @Value("${parcel.expires.in}")
     private long EXPIRES_IN;
 
     public String generateJwtToken(Authentication auth) {

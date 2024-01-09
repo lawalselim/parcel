@@ -1,6 +1,6 @@
 package com.example.parcel.service;
 
-import com.example.parcel.configuration.JwtUserDetails;
+import com.example.parcel.security.JwtUserDetails;
 import com.example.parcel.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

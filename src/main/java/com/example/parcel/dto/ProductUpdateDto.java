@@ -2,7 +2,6 @@ package com.example.parcel.dto;
 
 import com.example.parcel.model.Category;
 import com.example.parcel.model.Vendor;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data

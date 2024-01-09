@@ -1,17 +1,13 @@
 package com.example.parcel.service;
+
 import com.example.parcel.Request.UserDeleteRequest;
-import com.example.parcel.dto.UserDto;
 import com.example.parcel.dto.UserViewDto;
 import com.example.parcel.exception.NotFoundException;
-import com.example.parcel.Request.UserCreateRequest;
 import com.example.parcel.model.User;
 import com.example.parcel.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -22,9 +18,6 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
-
-
     @Override
     public List<User> getAll() {
         final List<User> users = this.userRepository.findAll();
@@ -35,7 +28,10 @@ public class UserServiceImpl implements UserService {
     public User getById(int id) {
         return userRepository.findById(id).orElseThrow(() -> new NotFoundException("user couldn't be found by following id: " + id));
     }
-
+    @Override
+    public User getByUserName(String userName) {
+        return userRepository.findByUserName(userName);
+    }
     public List<User> slice(Pageable pageable){
         final List<User> users = this.userRepository.findAll(pageable).stream().collect(Collectors.toList());
         return users;
@@ -52,25 +48,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
-    public UserDto updateUser(UserDto userDto) {
-        Optional<User> userOptional = userRepository.findById(userDto.getId());
-        if (userOptional.isPresent()) {
-            User existingUser = userOptional.get();
-            //User updatedUser = UserMapper.mapToUser(userDto);
-            updateUserFields(existingUser, userDto); // Update fields in existing user object
-            userRepository.save(existingUser);
-            return userDto;
+    //update user using the username
+    @Override
+    public void updateByUserName(int userId, String userName) {
+        Optional<User> user = userRepository.findById(userId);
+
+        if (user.isPresent()) {
+            user.get().setUserName(userName);
+            userRepository.save(user.get());
         }
-        return null; // Or throw an exception as needed
-        // Implementation to update user
-    }
-    private void updateUserFields(User existingUser, UserDto userDto) {
-        existingUser.setFirstName(userDto.getFirstName());
-        existingUser.setLastName(userDto.getLastName());
-        existingUser.setEmail(userDto.getEmail());
-        existingUser.setPhoneNumber(userDto.getPhoneNumber());
-        existingUser.setAddress(userDto.getAddress());
-        // Update other fields as needed
     }
 
     @Override
@@ -91,8 +77,21 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(user.getId());
     }
 
+    /*
+
+    @Override
+    public void updateByNotificationPermission(int userId, boolean permission) {
+        Optional<User> user = userRepository.findById(userId);
+
+        if (user.isPresent()) {
+            user.get().setNotificationPermission(permission);
+            userRepository.save(user.get());
+        }
 
 
+
+    }
+ */
 }
 
 

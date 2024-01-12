@@ -65,33 +65,25 @@ public class UserServiceImpl implements UserService {
         return users;
     }
     @Override
-    public User add(User userCreateDto) {
+    public User createUser(User userCreateDto) {
         this.userRepository.save(new User(userCreateDto.getUserName(), userCreateDto.getFirstName(), userCreateDto.getLastName(),
-                userCreateDto.getPassword(), userCreateDto.getPhoneNumber(), userCreateDto.getEmail(), userCreateDto.getUserCreateDate(), userCreateDto.isNotificationPermission()));
+                userCreateDto.getPassword(), userCreateDto.getPhoneNumber(), userCreateDto.getEmail(),userCreateDto.getUserCreateDate(), userCreateDto.isNotificationPermission()));
         return userCreateDto;
     }
+    /*
+    @Override
+    public UserDto addUser(UserDto userDto) {
+        this.userRepository.save(new User(userDto.getUserName(), userDto.getEmail(), userDto.getPassword(), userDto.getFirstName(), userDto.getLastName(), userDto.getPhoneNumber()));
+        return userDto;
+    }
 
+     */
     @Override
     public void authDeleteByUser(UserDeleteRequest userDeleteRequest) {
         User user = userRepository.findByEmail(userDeleteRequest.getEmail());
         userRepository.deleteById(user.getId());
     }
 
-    /*
-
-    @Override
-    public void updateByNotificationPermission(int userId, boolean permission) {
-        Optional<User> user = userRepository.findById(userId);
-
-        if (user.isPresent()) {
-            user.get().setNotificationPermission(permission);
-            userRepository.save(user.get());
-        }
-
-
-
-    }
- */
 }
 
 

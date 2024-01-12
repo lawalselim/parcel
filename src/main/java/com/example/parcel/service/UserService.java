@@ -9,7 +9,10 @@ import java.util.List;
 
 
 public interface UserService{
-    User add(User createDto);
+    //User add(User createDto);
+
+    User createUser( User createDto);
+    //UserDto addUser(UserDto userDto);
 
     User getById(int id);
 
@@ -27,5 +30,5 @@ public interface UserService{
     List<UserViewDto> getUserViewDto();
     void updateByUserName(int userId, String userName);
 
-    //void updateByNotificationPermission(int userId, boolean permission);
+    //UserCreateRequest User(User userCreateDto);
 }

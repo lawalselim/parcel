@@ -9,8 +9,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -34,28 +32,24 @@ public class User {
     @Column(name = "first_name")
     private String firstName;
 
-
     @Column(name = "last_name")
     private String lastName;
 
-
-    @Column(name = "email",nullable = false, unique = true )
+    @Column(name = "email" )
     @Email
     private String email;
-
 
     @Column(name = "phone_number")
     private String phoneNumber;
     @Column(name = "createDate")
     private Date userCreateDate;
+
     @Column(name = "notificationPermission")
     private boolean notificationPermission = true;
     @OneToMany
     private List<Address> address;
-
-
-    @Size(min=6, max = 32)
-    @Pattern( regexp= "\n" + "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,32}$\n") //regular expression used to provide strong password characteristics choice
+    //@Size(min=6, max = 32)
+    //@Pattern( regexp= "\n" + "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,32}$\n") //regular expression used to provide strong password characteristics choice
     @Column(name = "password")
     @NotNull(message = "{com.example.parcel.notnull.password.message}")
     private String password;

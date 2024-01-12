@@ -39,12 +39,21 @@ public class  UserController {
         return ResponseEntity.ok(users);
     }
 
-    @PostMapping("add")
-    public ResponseEntity<?> add(@RequestBody @Valid User userCreateDto) {
-        this.userService.add(userCreateDto);
+
+    @PostMapping("createUser")
+    public ResponseEntity<?> createUser(@RequestBody @Valid User userCreateDto) {
+        this.userService.createUser(userCreateDto);
         return ResponseEntity.ok(new GenericResponse("User Created."));
     }
 
+    /*
+    @PostMapping("/create-user")
+    public ResponseEntity<?> addUser(@RequestBody @Valid UserDto userDto) {
+        this.userService.addUser(userDto);
+        return ResponseEntity.ok(SysMessage.USER_SAVED);
+    }
+
+     */
     @PutMapping("updateByUsername")
     public ResponseEntity<?> updateByUserName(@RequestBody UserNameUpdateRequest userNameUpdateRequest) {
         userService.updateByUserName(userNameUpdateRequest.getUserId(), userNameUpdateRequest.getUserName());

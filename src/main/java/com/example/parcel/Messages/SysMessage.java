@@ -6,6 +6,8 @@ public interface SysMessage {
 
     String PRODUCT_DELETED = "Product Deleted";
 
+    String USER_SAVED ="User Saved";
+
     String PRODUCT_SAVED = "Product Saved";
 
     String NOT_FOUND_THIS_NAME = "No Product Found With This Name";

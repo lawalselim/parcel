@@ -4,8 +4,8 @@ import com.example.parcel.Messages.SysMessage;
 import com.example.parcel.Request.LoginRequest;
 import com.example.parcel.Request.UserCreateRequest;
 import com.example.parcel.Request.UserDeleteRequest;
-import com.example.parcel.security.JwtTokenProvider;
 import com.example.parcel.model.User;
+import com.example.parcel.security.JwtTokenProvider;
 import com.example.parcel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,9 +16,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import com.example.parcel.service.SendEmailService;
 
 import javax.mail.internet.AddressException;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -31,14 +31,15 @@ public class AuthController {
     private final UserService userService;
 
     private final PasswordEncoder passwordEncoder;
+    private final SendEmailService sendEmailService;
 
     @Autowired
-    public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService, PasswordEncoder passwordEncoder) {
+    public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService, PasswordEncoder passwordEncoder,SendEmailService sendEmailService) {
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
         this.jwtTokenProvider = jwtTokenProvider;
-        //this.sendEmailService = sendEmailService;
+        this.sendEmailService = sendEmailService;
     }
 
     @PostMapping("/login")
@@ -48,7 +49,7 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(auth);
         String jwtToken = jwtTokenProvider.generateJwtToken(auth);
         User user = userService.getByUserName(loginRequest.getEmail());
-        //sendEmailService.sendEmails(user.getEMail(), ECommerceMessage.LOGIN_BODY, ECommerceMessage.LOGIN_TOPIC);
+        sendEmailService.sendEmails(user.getEmail(), SysMessage.LOGIN_BODY, SysMessage.LOGIN_TOPIC);
         return "Bearer " + jwtToken;
     }
 
@@ -57,17 +58,12 @@ public class AuthController {
         if(userService.findByEmail(user.getEmail()) != null) {
             return new ResponseEntity<>(SysMessage.EMAIL_ALREADY_IN_USE, HttpStatus.BAD_REQUEST);
         }
-
         User newUser = new User();
-        newUser.setFirstName(user.getFirstName());
-        newUser.setLastName(user.getFirstName());
         newUser.setUserName(user.getUserName());
-        newUser.setPhoneNumber(user.getPhoneNumber());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setEmail(user.getEmail());
-        newUser.setUserCreateDate(new Date());
-        userService.add(newUser);
-        //sendEmailService.sendEmails(String.valueOf(user.getEmail()), SysMessage.REGISTER_BODY, SysMessage.REGISTER_TOPIC + SysMessage.REGISTER_TOPIC_EMOJI);
+        userService.createUser(newUser);
+        sendEmailService.sendEmails(String.valueOf(user.getEmail()), SysMessage.REGISTER_BODY, SysMessage.REGISTER_TOPIC + SysMessage.REGISTER_TOPIC_EMOJI);
         return new ResponseEntity<>(SysMessage.USER_CREATED, HttpStatus.CREATED);
     }
 
@@ -79,5 +75,3 @@ public class AuthController {
     }
 
 }
-
-/*SendEmailService sendEmailService*/

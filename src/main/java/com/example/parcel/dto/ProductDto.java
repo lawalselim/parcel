@@ -23,7 +23,7 @@ public class ProductDto {
 
     private String productImageUrl;
 
-    private int stock;
+    private Integer stock;
 
 
 

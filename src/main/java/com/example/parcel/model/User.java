@@ -23,39 +23,45 @@ public class User {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @NotNull(message = "{com.example.parcel.notnull.username.message}")
-    @Column(name = "username")
+    @Column(name = "userName")
     private String userName;
 
-    @Column(name = "first_name")
+    @NotNull
+    @Column(name = "firstName")
     private String firstName;
 
-    @Column(name = "last_name")
+    @NotNull
+    @Column(name = "lastName")
     private String lastName;
 
     @Column(name = "email" )
-    @Email
+    @Email(message = "{com.parcel.notnull.email.message}")
     private String email;
 
-    @Column(name = "phone_number")
+    @NotNull
+    @Column(name = "phoneNumber")
     private String phoneNumber;
+
     @Column(name = "createDate")
     private Date userCreateDate;
 
     @Column(name = "notificationPermission")
     private boolean notificationPermission = true;
+
     @OneToMany
     private List<Address> address;
-    //@Size(min=6, max = 32)
+
+
     //@Pattern( regexp= "\n" + "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,32}$\n") //regular expression used to provide strong password characteristics choice
     @Column(name = "password")
     @NotNull(message = "{com.example.parcel.notnull.password.message}")
     private String password;
 
 
-    public User(String userName,String firstName,String lastName, String password, String email,String phoneNumber, Date userCreateDate, boolean notificationPermission) {
+    public User(String userName,String firstName, String lastName, String password, String email, String phoneNumber, Date userCreateDate, boolean notificationPermission) {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;

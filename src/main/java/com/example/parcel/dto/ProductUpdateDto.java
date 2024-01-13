@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class ProductUpdateDto {
 
-    private int productId;
+    private Integer productId;
 
     private String productName;
 
@@ -19,7 +19,7 @@ public class ProductUpdateDto {
 
     private String productImageUrl;
 
-    private int stock;
+    private Integer stock;
 
     private Vendor vendor;
 

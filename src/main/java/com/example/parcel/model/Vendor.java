@@ -17,8 +17,8 @@ public class Vendor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
-    @Column(name = "full_name", nullable = false )
+    private Integer id;
+    @Column(name = "fullName", nullable = false )
     private String fullName;
 
     @Column(name = "profilePictureUrl")

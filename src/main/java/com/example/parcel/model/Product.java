@@ -21,29 +21,29 @@ public class Product {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "product_name" )
+    @Column(name = "productName" )
     private String productName;
-    @Column(name = "product_brand")
+    @Column(name = "productBrand")
     private String productBrand;
-    @Column(name = "product_description" )
+    @Column(name = "productDescription" )
     private  String productDescription;
-    @Column(name = "product_price")
+    @Column(name = "productPrice")
     private double productPrice;
-    @Column(name = "image")
+    @Column(name = "productImageUrl")
     private String productImageUrl;
     @Min(value = 1, message = "{com.example.parcel.Min.stock.message}")
     @Column(name = "stock")
-    private int stock;
+    private Integer stock;
     @ManyToOne
     private Category category;
     @ManyToOne
     private Vendor vendor;
     @Column(name = "favoriteNumber")
     @Min(value = 0)
-    private int favoriteNumber = 0;
+    private int favoriteNumber =0;
 
 
-    public Product(String productName, String productBrand, String productDescription, double productPrice, int stock, String productImageUrl) {
+    public Product(String productName, String productBrand, String productDescription, double productPrice, Integer stock, String productImageUrl) {
         this.productName = productName;
         this.productBrand = productBrand;
         this.productDescription = productDescription;

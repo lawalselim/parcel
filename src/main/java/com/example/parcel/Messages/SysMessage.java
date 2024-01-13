@@ -42,6 +42,8 @@ public interface SysMessage {
 
     String CATEGORY_NAME_ALREADY_IN_USE = "Category Name Already In Use!";
 
+    String CATEGORY_NAME_SAVED = "Category Name Saved Successfully";
+
     String SELLER_SAVED = "Seller Saved...";
 
     String SELLER_DELETED = "Seller Deleted.";

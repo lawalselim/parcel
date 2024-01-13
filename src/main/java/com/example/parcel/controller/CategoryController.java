@@ -25,7 +25,7 @@ public class CategoryController {
     @PostMapping("add")
     public ResponseEntity<?> add(@RequestBody Category category) {
         this.categoryService.add(category);
-        return ResponseEntity.ok(SysMessage.CATEGORY_NAME_ALREADY_IN_USE);
+        return ResponseEntity.ok(SysMessage.CATEGORY_NAME_SAVED);
     }
 
     @GetMapping("getByCategoryName")
